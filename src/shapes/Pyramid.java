@@ -1,21 +1,20 @@
 package shapes;
 
-
 public class Pyramid extends Shape {
 	
     private double height;
-    private double edgeLength;
+    private double side;
 
     // Constructor
-    public Pyramid(double height, double edgeLength) {
+    public Pyramid(double height, double side) {
         this.height = height;
-        this.edgeLength = edgeLength;
+        this.side = side;
     }
 
     // Calculates the base area of the pyramid (assuming a square base)
     @Override
     public double getArea() {
-        return Math.pow(edgeLength, 2);
+        return Math.pow(side, 2);
     }
 
     // Calculates the volume of the pyramid: (1/3) * base area * height
@@ -33,6 +32,6 @@ public class Pyramid extends Shape {
     
     @Override
     public String toString() {
-        return "Pyramid [Height=" + height + ", Edge Length=" + edgeLength + "]";
+        return "Pyramid [Height=" + height + ", Edge Length=" + side + "]";
     }
 }

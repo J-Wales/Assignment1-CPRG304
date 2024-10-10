@@ -1,4 +1,4 @@
-package utilities;
+package shapes;
 
 import java.util.Comparator;
 
