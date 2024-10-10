@@ -98,10 +98,10 @@ public class AppDriver
 		    	  		break;
 		    	  		
 		    	  	// Case 7: If Pyramid is considered.
-//		    	  	case "Pyramid":
-//		    	  		Pyramid octagonalPrism = new Pyramid(height, side);
-//		    	  		System.out.println("The Pyramid has a volume of: " + Pyramid.getVolume());
-//		    	  		break;
+		    	  	case "Pyramid":
+		    	  		Pyramid pyramid = new Pyramid(height, side);
+		    	  		System.out.println("The Pyramid has a volume of: " + pyramid.getVolume());
+		    	  		break;
 		    	  	
 		    	  	// Default case if unknown shape is considered.
 		    	  	default:
