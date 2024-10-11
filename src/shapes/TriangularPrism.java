@@ -28,4 +28,9 @@ public class TriangularPrism extends Shape
 	public double getVolume() {
 		return getArea() * getHeight();
 	}
+
+	@Override
+    public String toString() {
+        return "The polygons.TriangularPrism has a Volume of: " + getVolume();
+    }
 }
