@@ -25,6 +25,11 @@ public class SquarePrism extends Shape
 	}
 
 	@Override
+    public String toString() {
+        return "The polygons.SquarePrism has a Volume of: " + getVolume();
+    }
+
+	@Override
 	public double getVolume() {
 		return getArea() * getHeight();
 	}
