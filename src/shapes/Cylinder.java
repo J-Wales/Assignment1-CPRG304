@@ -18,18 +18,22 @@ public class Cylinder extends Shape
 		volume = (Math.PI * Math.pow(radius, 2) * height);
 	}
 	
-	@Override
+	
 	public double getHeight() {
 		return this.height;
 	}
 	
-	@Override
+	
 	public double getVolume() {
 		return this.volume;
 	}
 	
-	@Override
+
 	public double getArea() {
 		return this.baseArea;
 	}
+
+   	public String toString() {
+        	return "The shape.Cylinder has a Volume of: " + getVolume();
+    	}
 }
