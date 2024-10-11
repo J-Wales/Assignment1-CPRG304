@@ -24,4 +24,9 @@ public class Cone extends Shape
     public double getArea() {
         return Math.PI * radius * radius;
     }
+@Override
+    public String toString() {
+        return "The shape.Cone has a Volume of: " + getVolume();
+    }
+
 }
