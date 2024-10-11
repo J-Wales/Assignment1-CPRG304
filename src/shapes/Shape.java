@@ -1,34 +1,34 @@
 package shapes;
 
+import java.util.Comparator;
 
-public class Pyramid extends Shape {
-    private double height;
-    private double edgeLength;
+public abstract class Shape implements Comparable<Shape> {
 
-
-    public Pyramid(double height, double edgeLength) {
-        this.height = height;
-        this.edgeLength = edgeLength;
-    }
+    // Abstract methods for height, volume, and area
+    public abstract double getHeight();
+    public abstract double getVolume();
+    public abstract double getArea();
 
  
-    public double getArea() {
-        return Math.pow(edgeLength, 2);
-    }
-
-    
-    public double getVolume() {
-        return (1.0 / 3.0) * getArea() * height;
-    }
-
-    
-    public double getHeight() {
-        return height;
-    }
-
-    
     @Override
-    public String toString() {
-        return "The shape.Pyramid has a Volume of: " + getVolume();
+    public int compareTo(Shape other) {
+        // Compares heights in descending order
+        return Double.compare(other.getHeight(), this.getHeight());
     }
+
+  
+    public static Comparator<Shape> AreaComparator = new Comparator<Shape>() {
+        @Override
+        public int compare(Shape s1, Shape s2) {
+            return Double.compare(s1.getArea(), s2.getArea());
+        }
+    };
+
+  
+    public static Comparator<Shape> VolumeComparator = new Comparator<Shape>() {
+        @Override
+        public int compare(Shape s1, Shape s2) {
+            return Double.compare(s1.getVolume(), s2.getVolume());
+        }
+    };
 }
