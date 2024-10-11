@@ -14,18 +14,23 @@ public class OctagonalPrism extends Shape
 		return side;
 	}
 	
-	@Override
+
 	public double getHeight() {
 		return height;
 	}
 	
-	@Override
+	
 	public double getArea() {
 		return 2 * (1 + Math.sqrt(2)) * Math.pow(getSide(), 2);
 	}
 
-	@Override
+	
 	public double getVolume() {
 		return getArea() * getHeight();
 	}
+
+	@Override
+    	public String toString() {
+        	return "The polygons.OctagonalPrism has a Volume of: " + getVolume();
+    }
 }
