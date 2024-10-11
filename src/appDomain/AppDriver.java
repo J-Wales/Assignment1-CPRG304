@@ -1,133 +1,140 @@
 package appDomain;
+import shapes.*;
+import utilities.BubbleSort;
+import utilities.InsertionSort;
+import utilities.SelectionSort;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import shapes.*;
-
 public class AppDriver
 {
 
-	public static void main( String[] args )
-	{
+	
+	// TODO Auto-generated method stub
+
+	// refer to demo001 BasicFileIO.java for a simple example on how to
+	// read data from a text file
+
+	// refer to demo01 Test.java for an example on how to parse command
+	// line arguments and benchmarking tests
+
+	// refer to demo02 Student.java for comparable implementation, and
+	// NameCompare.java or GradeCompare for comparator implementations
+
+	// refer to demo02 KittySort.java on how to use a custom sorting
+	// algorithm on a list of comparables to sort using either the
+	// natural order (comparable) or other orders (comparators)
+	
+	public static void main(String[] args) {
+  
+        Shape[] shapes = readShapesFromFile("res/shapes2.txt");
+
+        // if (shapes.length == 0) {
+        //     System.out.println("No shapes to sort.");
+        //     return;
+        // }
+
+       	// Start timer
+        long startTime = System.currentTimeMillis();  
+
+        // Use any sorting algorithm here 
+        BubbleSort.bubbleSort(shapes);  
 		
-		// Read data from a text file.
-		try 
-			{
-			  // ***** Change your file path here. *****
-		      File myFile = new File("res/shapes1.txt");
-		      // ***** Change your file path here. *****
-		      
-		      Scanner myReader = new Scanner(myFile);
-		      
-		      // Read the first line which contains the number of shapes.
-		      int numberOfShapes = myReader.nextInt();
-		      
-		      // Create an array of shapes.
-		      String[] shapes = new String[numberOfShapes];
-		      
-		   	  // Skip the first line which is the number of shapes.
-		      myReader.nextLine();
-		      
-		      // Shape indexing and tracking.
-		      int currentShape = 0;
-		      
-		      // Loop reading each line.
-		      while (myReader.hasNextLine()) 
-		      {
-		    	 // Store each line to shapes's array, then increase the index value.
-		    	 shapes[currentShape] = myReader.nextLine();
-		    	 currentShape++;
-		      }
-		      
-		      // Close file when the process is done.
-		      myReader.close();
-		      
-		      // Iteration all shapes that got from text files.
-		      for (String shape : shapes) 
-		      {
-		    	  	// Split each element in array, then assign to variable by using its index.
-		    	  	String[] shapeComponents = shape.split(" ");
-		    	  	String firstIndex = shapeComponents[0];
-		    	  	String secondIndex = shapeComponents[1];
-		    	  	String thirdIndex = shapeComponents[2];
-		    	  	
-		    	  	// Assign height and side.
-		    	  	double height = Double.parseDouble(secondIndex);
-	    	  		double side = Double.parseDouble(thirdIndex);
-	    	  		double radius = Double.parseDouble(thirdIndex);
-		    	  	
-	    	  		// Switch case by using firstIndex which is the name of the shape in text file.
-		    	  	switch (firstIndex) 
-		    	  	
-		    	  	{
-		    	  	// Case 1: If SquarePrism is considered.
-		    	  	case "SquarePrism":
-		    	  		SquarePrism squarePrism = new SquarePrism(height, side);
-		    	  		System.out.println("The SquarePrism has a volume of: " + squarePrism.getVolume());
-		    	  		break;
-		    	  	
-		    	  	// Case 2: If TriangularPrism is considered.
-		    	  	case "TriangularPrism":
-		                TriangularPrism triangularPrism = new TriangularPrism(height, side);
-		                System.out.println("The TriangularPrism has a volume of: " + triangularPrism.getVolume());
-		    	  		break;
-		    	  	
-		    	  	// Case 3: If PentagonalPrism is considered.
-		    	  	case "PentagonalPrism":
-		                PentagonalPrism pentagonalPrism = new PentagonalPrism(height, side);
-		                System.out.println("The PentagonalPrism has a volume of: " + pentagonalPrism.getVolume());
-		    	  		break;
-		    	  		
-		    	  	// Case 4: If OctagonalPrism is considered.
-		    	  	case "OctagonalPrism":
-		    	  		OctagonalPrism octagonalPrism = new OctagonalPrism(height, side);
-		    	  		System.out.println("The OctagonalPrism has a volume of: " + octagonalPrism.getVolume());
-		    	  		break;
-		    	  	
-		    	  	// Case 5: If Cone is considered.
-		    	  	case "Cone":
-		    	  		Cone cone = new Cone(height, radius);
-		    	  		System.out.println("The Cone has a volume of: " + cone.getVolume());
-		    	  		break;
-		    	  	
-		    	  	// Case 6: If Cylinder is considered.
-		    	  	case "Cylinder":
-		    	  		Cylinder cylinder = new Cylinder(height, radius);
-		    	  		System.out.println("The Cylinder has a volume of: " + cylinder.getVolume());
-		    	  		break;
-		    	  		
-		    	  	// Case 7: If Pyramid is considered.
-		    	  	case "Pyramid":
-		    	  		Pyramid pyramid = new Pyramid(height, side);
-		    	  		System.out.println("The Pyramid has a volume of: " + pyramid.getVolume());
-		    	  		break;
-		    	  	
-		    	  	// Default case if unknown shape is considered.
-		    	  	default:
-		                System.out.println("Unknown shape type: " + firstIndex);
-		                break;
-		    	  	}
-		      
-				}
-		    }
-		
-		catch (FileNotFoundException e) 
-			{
-		      System.out.println("An error occurred.");
-		      e.printStackTrace();
-		    }
+	// End timer
+        long endTime = System.currentTimeMillis();  
 
-		// refer to demo01 Test.java for an example on how to parse command
-		// line arguments and benchmarking tests
+        // DisplayS the first, every 1000th, and last element
+        printSortedHighlights(shapes);
 
-		// refer to demo02 Student.java for comparable implementation, and
-		// NameCompare.java or GradeCompare for comparator implementations
+        // Displays runtime
+        System.out.println("b run time was: " + (endTime - startTime) + " milliseconds");
+    }
 
-		// refer to demo02 KittySort.java on how to use a custom sorting
-		// algorithm on a list of comparables to sort using either the
-		// natural order (comparable) or other orders (comparators)
+    /**
+     * Reads shape data from a file and returns an array of shapes.
+     */
+    public static Shape[] readShapesFromFile(String filePath) {
+        try {
+            File file = new File(filePath);
+            Scanner scanner = new Scanner(file);
 
-	}
+            int numberOfShapes = scanner.nextInt();  
+            Shape[] shapes = new Shape[numberOfShapes];  
+
+            // Skips the fist line (number of elements)
+            scanner.nextLine();
+
+            int index = 0;
+            while (scanner.hasNextLine() && index < numberOfShapes) { 
+                String[] shapeData = scanner.nextLine().split(" ");
+                String shapeType = shapeData[0];
+                double height = Double.parseDouble(shapeData[1]);
+                double side = Double.parseDouble(shapeData[2]);
+
+                // Creates the appropriate shape based on the type
+                switch (shapeType) {
+                    case "Pyramid":
+                        shapes[index++] = new Pyramid(height, side);
+                        break;
+                    case "Cylinder":
+                        shapes[index++] = new Cylinder(height, side);
+                        break;
+                    case "Cone":
+                        shapes[index++] = new Cone(height, side);
+                        break;
+                    case "PentagonalPrism":
+                        shapes[index++] = new PentagonalPrism(height, side);
+                        break;
+                    case "OctagonalPrism":
+                        shapes[index++] = new OctagonalPrism(height, side);
+                        break;
+                    case "TriangularPrism":
+                        shapes[index++] = new TriangularPrism(height, side);
+                        break;
+                    case "SquarePrism":
+                        shapes[index++] = new SquarePrism(height, side);  // Handle SquarePrism
+                        break;
+                    	
+                    default:
+                        System.out.println("Unknown shape type: " + shapeType);
+                        break;
+                }
+            }
+
+            scanner.close();
+            return shapes;
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + filePath);
+            e.printStackTrace();
+        }
+        return new Shape[0];  
+    }
+
+    /**
+     * Prints the first element, every 1000th element, and the last element of the sorted array.
+     */
+    public static void printSortedHighlights(Shape[] shapes) {
+        int n = shapes.length;
+
+        // Prints the first element
+        System.out.println("First element is: " + shapes[0]);
+
+        // Prints every 1000th element
+        for (int i = 1000; i < n; i += 1000) {
+            System.out.println(i + "-th element is: " + shapes[i - 1]);
+        }
+
+        // Prints the second last element
+        if (n > 1) {
+            System.out.println("Second Last element is: " + shapes[n - 2]);
+        }
+
+        // Prints the last element
+        System.out.println("Last element is: " + shapes[n - 1]);
+    }
+	
+        
 
 }
