@@ -14,18 +14,23 @@ public class PentagonalPrism extends Shape
 		return side;
 	}
 	
-	@Override
+	
 	public double getHeight() {
 		return height;
 	}
 	
-	@Override
+	
 	public double getArea() {
 		return ((5 * Math.pow(getSide(), 2) * Math.tan(54 * (Math.PI / 180))) / 4);
 	}
 
-	@Override
+	
 	public double getVolume() {
 		return getArea() * getHeight();
 	}
+
+	@Override
+    public String toString() {
+        return "The polygons.PentagonalPrism has a Volume of: " + getVolume();
+    }
 }
