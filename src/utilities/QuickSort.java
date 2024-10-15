@@ -1,4 +1,5 @@
 package utilities;
+import java.util.Comparator;
 
 public class QuickSort {
 
