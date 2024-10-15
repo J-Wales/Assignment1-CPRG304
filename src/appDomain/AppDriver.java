@@ -1,16 +1,15 @@
 package appDomain;
 import shapes.*;
-import utilities.BubbleSort;
-import utilities.InsertionSort;
-import utilities.SelectionSort;
+import utilities.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.Comparator;
+
 
 public class AppDriver
 {
 
-	
 	// TODO Auto-generated method stub
 
 	// refer to demo001 BasicFileIO.java for a simple example on how to
@@ -29,7 +28,7 @@ public class AppDriver
 	public static void main(String[] args) {
   
         Shape[] shapes = readShapesFromFile("res/shapes2.txt");
-
+        
         // if (shapes.length == 0) {
         //     System.out.println("No shapes to sort.");
         //     return;
@@ -39,16 +38,23 @@ public class AppDriver
         long startTime = System.currentTimeMillis();  
 
         // Use any sorting algorithm here 
-        BubbleSort.bubbleSort(shapes);  
-		
-	// End timer
+        // BubbleSort.bubbleSort(shapes);
+        // MergeSort.mergeSort(shapes, Shape.VolumeComparator);
+        
+        // End timer
         long endTime = System.currentTimeMillis();  
 
         // DisplayS the first, every 1000th, and last element
-        printSortedHighlights(shapes);
-
+         printSortedHighlights(shapes);
+        
         // Displays runtime
         System.out.println("b run time was: " + (endTime - startTime) + " milliseconds");
+        
+        // New array
+        System.out.println("Sorted Data:");
+        for (Shape shape : shapes) {
+        	System.out.println(shape);
+        }
     }
 
     /**
@@ -93,7 +99,7 @@ public class AppDriver
                         shapes[index++] = new TriangularPrism(height, side);
                         break;
                     case "SquarePrism":
-                        shapes[index++] = new SquarePrism(height, side);  // Handle SquarePrism
+                        shapes[index++] = new SquarePrism(height, side);
                         break;
                     	
                     default:
@@ -134,7 +140,4 @@ public class AppDriver
         // Prints the last element
         System.out.println("Last element is: " + shapes[n - 1]);
     }
-	
-        
-
 }
