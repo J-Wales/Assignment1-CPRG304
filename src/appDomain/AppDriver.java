@@ -1,66 +1,111 @@
 package appDomain;
+
 import shapes.*;
 import utilities.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 import java.util.Comparator;
+import java.util.Scanner;
+
+public class AppDriver {
+
+    public static void main(String[] args) {
+        // Parses the command line arguments
+        String filePath = ""; // Placeholder 
+        Comparator<Shape> comparator = null; // Placeholder 
+        String sortAlgorithm = ""; // Placeholder 
+
+        // Parses command line arguments
+        for (String arg : args) {
+            if (arg.startsWith("-f") || arg.startsWith("-F")) {
+                filePath = arg.substring(2);  
+            } else if (arg.startsWith("-t") || arg.startsWith("-T")) {
+                char type = arg.charAt(2);  
+                switch (type) {
+                    case 'v':  // Sort by volume
+                        comparator = Shape.VolumeComparator.reversed();  
+                        break;
+                    case 'h':  // Sort by height (natural order)
+                        comparator = Comparator.naturalOrder();  
+                        break;
+                    case 'a':  // Sort by base area
+                        comparator = Shape.AreaComparator.reversed();  
+                        break;
+                    default:
+                        System.out.println("Invalid sorting type: " + type);
+                        return;
+                }
+            } else if (arg.startsWith("-s") || arg.startsWith("-S")) {
+                sortAlgorithm = arg.substring(2).toLowerCase();  
+            }
+        }
 
 
-public class AppDriver
-{
+        // Reads shape data from the file
+        Shape[] shapes = readShapesFromFile(filePath);
+        if (shapes.length == 0) {
+            System.out.println("No shapes to sort.");
+            return;
+        }
 
-	// TODO Auto-generated method stub
+//     //   DEBUG
+//        for (Shape shape : shapes) {
+//            System.out.println(shape + " has a Volume of: " + shape.getVolume());
+//        }
 
-	// refer to demo001 BasicFileIO.java for a simple example on how to
-	// read data from a text file
-
-	// refer to demo01 Test.java for an example on how to parse command
-	// line arguments and benchmarking tests
-
-	// refer to demo02 Student.java for comparable implementation, and
-	// NameCompare.java or GradeCompare for comparator implementations
-
-	// refer to demo02 KittySort.java on how to use a custom sorting
-	// algorithm on a list of comparables to sort using either the
-	// natural order (comparable) or other orders (comparators)
-	
-	public static void main(String[] args) {
-  
-        Shape[] shapes = readShapesFromFile("res/shapes2.txt");
+    
         
-        // if (shapes.length == 0) {
-        //     System.out.println("No shapes to sort.");
-        //     return;
-        // }
-
-       	// Start timer
+        // Start time
         long startTime = System.currentTimeMillis();  
 
-        // Use any sorting algorithm here 
-        // BubbleSort.bubbleSort(shapes);
-        // MergeSort.mergeSort(shapes, Shape.VolumeComparator);
-        
+        // Sorts the shapes based on the user selected algorithm and comparator
+        switch (sortAlgorithm) {
+            // Bubble sort
+            case "b": 
+            	BubbleSort.bubbleSort(shapes, Shape.VolumeComparator.reversed());
+                break;
+            // Selection sort
+            case "s":  
+                SelectionSort.selectionSort(shapes, comparator);
+                break;
+            // Insertion sort
+            case "i":  
+                InsertionSort.insertionSort(shapes, comparator);
+                break;
+            // Merge sort
+            case "m":  
+                MergeSort.mergeSort(shapes, comparator);
+                break;
+            // Cocktail sort 
+            case "z": 
+                CocktailSort.cocktailSort(shapes, comparator);
+                break;
+            default:
+                System.out.println("Invalid sorting algorithm: " + sortAlgorithm);
+                return;
+        }
         // End timer
         long endTime = System.currentTimeMillis();  
 
-        // DisplayS the first, every 1000th, and last element
-         printSortedHighlights(shapes);
-        
-        // Displays runtime
-        System.out.println("b run time was: " + (endTime - startTime) + " milliseconds");
-        
-        // New array
-        System.out.println("Sorted Data:");
-        for (Shape shape : shapes) {
-        	System.out.println(shape);
-        }
+//     // DEBUG: Print the volume of each shape after sorting
+//        System.out.println("After Sorting:");
+//        for (Shape shape : shapes) {
+//            System.out.println(shape + " has a Volume of: " + shape.getVolume());
+//        }
+
+        // Displays the sorted elements
+       
+        displaySortedShapes(shapes);
+
+        // Step 6: Display runtime
+        System.out.println(sortAlgorithm + " sort run time was: " + (endTime - startTime) + " milliseconds");
     }
 
     /**
      * Reads shape data from a file and returns an array of shapes.
      */
     public static Shape[] readShapesFromFile(String filePath) {
+    	// Error checks to make sure array is not empty
         try {
             File file = new File(filePath);
             Scanner scanner = new Scanner(file);
@@ -68,17 +113,17 @@ public class AppDriver
             int numberOfShapes = scanner.nextInt();  
             Shape[] shapes = new Shape[numberOfShapes];  
 
-            // Skips the fist line (number of elements)
+            // Skips the first line (number of shapes)
             scanner.nextLine();
 
             int index = 0;
-            while (scanner.hasNextLine() && index < numberOfShapes) { 
+            while (scanner.hasNextLine() && index < numberOfShapes) {  
                 String[] shapeData = scanner.nextLine().split(" ");
                 String shapeType = shapeData[0];
                 double height = Double.parseDouble(shapeData[1]);
                 double side = Double.parseDouble(shapeData[2]);
 
-                // Creates the appropriate shape based on the type
+                // Create the appropriate shape based on the type
                 switch (shapeType) {
                     case "Pyramid":
                         shapes[index++] = new Pyramid(height, side);
@@ -101,7 +146,6 @@ public class AppDriver
                     case "SquarePrism":
                         shapes[index++] = new SquarePrism(height, side);
                         break;
-                    	
                     default:
                         System.out.println("Unknown shape type: " + shapeType);
                         break;
@@ -121,23 +165,22 @@ public class AppDriver
     /**
      * Prints the first element, every 1000th element, and the last element of the sorted array.
      */
-    public static void printSortedHighlights(Shape[] shapes) {
+    public static void displaySortedShapes(Shape[] shapes) {
         int n = shapes.length;
 
-        // Prints the first element
         System.out.println("First element is: " + shapes[0]);
 
-        // Prints every 1000th element
+        
         for (int i = 1000; i < n; i += 1000) {
             System.out.println(i + "-th element is: " + shapes[i - 1]);
         }
 
-        // Prints the second last element
+      
         if (n > 1) {
             System.out.println("Second Last element is: " + shapes[n - 2]);
         }
 
-        // Prints the last element
+
         System.out.println("Last element is: " + shapes[n - 1]);
     }
 }
