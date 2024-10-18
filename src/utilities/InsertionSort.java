@@ -82,18 +82,18 @@ public final class InsertionSort {
             T currentValue = array[i];
             int j = i - 1;
 
-            
+            // If no comparator is provided, use natural ordering in descending order
             while (j >= 0 && compare(array[j], currentValue, comparator) < 0) {
                 array[j + 1] = array[j];
                 j--;
             }
 
-           
+            // Insert the current element into its correct position
             array[j + 1] = currentValue;
         }
     }
 
-   
+    // Helper method to compare elements, using the comparator if provided
     private static <T> int compare(T element1, T element2, Comparator<? super T> comparator) {
         if (comparator == null) {
             return ((Comparable<T>) element1).compareTo(element2);
@@ -102,7 +102,7 @@ public final class InsertionSort {
         }
     }
 
-    // Helper method? (as shown in Kittysort)
+    // Helper method (as shown in Kittysort)
     private static <T> void swapElements(T[] array, int i, int j) {
         T temp = array[i];
         array[i] = array[j];
