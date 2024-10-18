@@ -4,70 +4,6 @@
 package utilities;
 import java.util.Comparator;
 
-///**
-// * 
-// */
-//public class SelectionSort {
-//	
-//	/**
-//     * Generic Selection Sort for arrays of Comparable elements.
-//     * This method sorts the array based on the natural ordering of its elements.
-//     *
-//     * @param array the array to be sorted
-//     * @param <T>   the type of elements in the array, which must implement Comparable
-//     */
-//	
-//	public static <T extends Comparable<? super T>> void selectionSort(T[] array) {
-//        int n = array.length;
-//
-//        // Outer loop to traverse the entire array
-//        for (int i = 0; i < n - 1; i++) {
-//            int minIndex = i;  // Assume the first element is the minimum
-//
-//            // Inner loop to find the minimum element in the unsorted portion
-//            for (int j = i + 1; j < n; j++) {
-//                if (array[j].compareTo(array[minIndex]) < 0) {
-//                    minIndex = j;  // Update minIndex if a smaller element is found
-//                }
-//            }
-//
-//            // Swap the found minimum element with the first element of the unsorted portion
-//            T temp = array[minIndex];
-//            array[minIndex] = array[i];
-//            array[i] = temp;
-//        }
-//    }
-//
-//    /**
-//     * Generic Selection Sort using a custom Comparator.
-//     * This method sorts the array based on the ordering defined by the Comparator.
-//     *
-//     * @param array      the array to be sorted
-//     * @param comparator the comparator to determine the order of elements
-//     * @param <T>        the type of elements in the array
-//     */
-//    public static <T> void selectionSort(T[] array, Comparator<? super T> comparator) {
-//        int n = array.length;
-//
-//        // Outer loop to traverse the entire array
-//        for (int i = 0; i < n - 1; i++) {
-//            int minIndex = i;  // Assume the first element is the minimum
-//
-//            // Inner loop to find the minimum element in the unsorted portion
-//            for (int j = i + 1; j < n; j++) {
-//                if (comparator.compare(array[j], array[minIndex]) < 0) {
-//                    minIndex = j;  // Update minIndex if a smaller element is found
-//                }
-//            }
-//
-//            // Swaps the found minimum element with the first element of the unsorted portion
-//            T temp = array[minIndex];
-//            array[minIndex] = array[i];
-//            array[i] = temp;
-//        }
-//    }
-//
-//}
 
 
 
@@ -122,7 +58,7 @@ public final class SelectionSort {
     }
 
     /**
-     * Helper method? (as shown in Kittysort)
+     * Helper method to swap two elements in the array.
      */
     private static <T> void swapElements(T[] array, int i, int j) {
         T temp = array[i];
