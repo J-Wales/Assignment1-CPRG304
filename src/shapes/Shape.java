@@ -9,27 +9,26 @@ public abstract class Shape implements Comparable<Shape> {
     public abstract double getVolume();
     public abstract double getArea();
 
- 
+    // Implements the compareTo method to compare by height in descending order
     @Override
     public int compareTo(Shape other) {
-        // Compares heights in descending order
+        // Compare heights in descending order
         return Double.compare(other.getHeight(), this.getHeight());
     }
 
-  
+    // Comparator to compare shapes by base area in descending order
     public static Comparator<Shape> AreaComparator = new Comparator<Shape>() {
         @Override
         public int compare(Shape s1, Shape s2) {
-            return Double.compare(s1.getArea(), s2.getArea());
+            return Double.compare(s2.getArea(), s1.getArea());
         }
     };
 
-  
+    // Comparator to compare shapes by volume in descending order
     public static Comparator<Shape> VolumeComparator = new Comparator<Shape>() {
         @Override
         public int compare(Shape s1, Shape s2) {
-            return Double.compare(s1.getVolume(), s2.getVolume());
+            return Double.compare(s2.getVolume(), s1.getVolume());
         }
     };
-    
 }
