@@ -36,7 +36,7 @@ public final class SelectionSort {
 
             // Inner loop to find the maximum element in the unsorted portion
             for (int j = i + 1; j < n; j++) {
-                if (compare(array[j], array[maxIndex], comparator) > 0) {
+                if (compare(array[j], array[maxIndex], comparator) < 0) {
                     maxIndex = j;  // Update maxIndex if a larger element is found
                 }
             }
