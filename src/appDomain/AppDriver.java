@@ -49,36 +49,36 @@ public class AppDriver
             // Check type to sort which are height, volume or area.
             else if (argElement.startsWith("-t")) 
             {
-             // Assign sort type to variable.
-             sortType = argElement.substring(2);
+	             // Assign sort type to variable.
+	             sortType = argElement.substring(2);
            
-             // If sortType doesn't match with "v", "h", "a" just return.
-             if (!sortType.matches("[hav]")) 
-             {
-                  System.out.println("Sort type must be 'h' for sorting by height, "
-                    + "'a' for sorting by area "
-                    + "or 'v' for sorting by volume");
-                  return;
-             }
+	             // If sortType doesn't match with "h", "a", "v" just return.
+	             if (!sortType.matches("[hav]")) 
+	             {
+	                  System.out.println("Sort type must be 'h' for sorting by height, "
+	                    + "'a' for sorting by area "
+	                    + "or 'v' for sorting by volume");
+	                  return;
+	             }
             }
             
          // Check algorithm to sort.
             else if (argElement.startsWith("-s")) 
             {
-             // Assign sort algorithm to variable.
-             sortAlgorithm = argElement.substring(2);
-             
-             // If sortType doesn't match just return.
-             if (!sortAlgorithm.matches("[bzimqs]")) 
-             {
-                    System.out.println("Sort algorithm must be one of 'b' for bubble sort, "
-                      + "'z' for cocktail sort, "
-                      + "'i' for insertion sort, "
-                      + "'m' for merge sort, "
-                      + "'q' for quick sort, "
-                      + "or 's' for selection sort.");
-                    return;
-                }
+	             // Assign sort algorithm to variable.
+	             sortAlgorithm = argElement.substring(2);
+	             
+	             // If sortType doesn't match just return.
+	             if (!sortAlgorithm.matches("[bzimqs]")) 
+	             {
+	                    System.out.println("Sort algorithm must be one of 'b' for bubble sort, "
+	                      + "'z' for cocktail sort, "
+	                      + "'i' for insertion sort, "
+	                      + "'m' for merge sort, "
+	                      + "'q' for quick sort, "
+	                      + "or 's' for selection sort.");
+	                    return;
+	                }
              
             } 
             
